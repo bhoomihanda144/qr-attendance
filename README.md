@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎓 SmartAttend — QR-Based Smart Attendance System
 
 A full-stack, AI-powered attendance management system for colleges.
@@ -191,3 +192,6 @@ attendance (id, student_id, session_id, date, time, status)
 | QR Scanning | html5-qrcode |
 | Fonts | Syne, DM Sans (Google Fonts) |
 | Icons | Font Awesome 6 |
+=======
+# qr-attendance
+>>>>>>> 213abe22453fd0c7df050bfe53b5c2fc78b80352
