@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SmartAttend — QR Attendance System</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
 
   <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -18,541 +21,564 @@
   <!-- QR Scanner -->
   <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 
-  <link rel="stylesheet" href="/static/css/style.css"/>
+  <link rel="stylesheet" href="/static/css/style.css" />
 </head>
+
 <body>
 
-<!-- ══════════════════════════════════════════════════
+  <!-- ══════════════════════════════════════════════════
      SPLASH / LANDING
 ═══════════════════════════════════════════════════ -->
-<div id="page-landing" class="page active">
-  <div class="landing-bg"></div>
-  <div class="landing-grid"></div>
+  <div id="page-landing" class="page active">
+    <div class="landing-bg"></div>
+    <div class="landing-grid"></div>
 
-  <header class="landing-header">
-    <div class="logo">
-      <span class="logo-icon"><i class="fas fa-qrcode"></i></span>
-      <span class="logo-text">SmartAttend</span>
-    </div>
-  </header>
-
-  <main class="landing-main">
-    <div class="landing-badge">AI-Powered · QR-Based · Real-Time</div>
-    <h1 class="landing-title">Smart<br><span class="accent">Attendance</span><br>System</h1>
-    <p class="landing-sub">Effortless QR scanning, ML-powered insights,<br>and zero proxy attendance.</p>
-
-    <div class="landing-cards">
-      <div class="role-card" id="btn-teacher-entry">
-        <div class="role-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-        <h3>Teacher</h3>
-        <p>Generate QR codes, manage sessions & view reports</p>
-        <span class="role-arrow"><i class="fas fa-arrow-right"></i></span>
-      </div>
-      <div class="role-card" id="btn-student-entry">
-        <div class="role-icon"><i class="fas fa-user-graduate"></i></div>
-        <h3>Student</h3>
-        <p>Scan QR to mark attendance & track your progress</p>
-        <span class="role-arrow"><i class="fas fa-arrow-right"></i></span>
-      </div>
-    </div>
-  </main>
-</div>
-
-<!-- ══════════════════════════════════════════════════
-     AUTH PAGES
-═══════════════════════════════════════════════════ -->
-<div id="page-auth" class="page">
-  <div class="auth-split">
-    <!-- Left panel -->
-    <div class="auth-panel-left">
-      <button class="btn-back" onclick="showPage('landing')">
-        <i class="fas fa-arrow-left"></i> Back
-      </button>
-      <div class="auth-brand">
+    <header class="landing-header">
+      <div class="logo">
         <span class="logo-icon"><i class="fas fa-qrcode"></i></span>
         <span class="logo-text">SmartAttend</span>
       </div>
-      <h2 id="auth-title" class="auth-panel-title">Teacher Login</h2>
-      <p id="auth-subtitle" class="auth-panel-sub">Access your dashboard</p>
-      <div class="auth-art">
-        <div class="art-ring r1"></div>
-        <div class="art-ring r2"></div>
-        <div class="art-ring r3"></div>
-        <i id="auth-icon" class="fas fa-chalkboard-teacher art-center-icon"></i>
-      </div>
-    </div>
+    </header>
 
-    <!-- Right panel - form -->
-    <div class="auth-panel-right">
-      <div class="auth-tabs">
-        <button class="tab-btn active" id="tab-login" onclick="switchAuthTab('login')">Login</button>
-        <button class="tab-btn" id="tab-register" onclick="switchAuthTab('register')">Register</button>
+    <main class="landing-main">
+      <div class="landing-badge">AI-Powered · QR-Based · Real-Time</div>
+      <h1 class="landing-title">Smart<br><span class="accent">Attendance</span><br>System</h1>
+      <p class="landing-sub">Effortless QR scanning, ML-powered insights,<br>and zero proxy attendance.</p>
+
+      <div class="landing-cards">
+        <div class="role-card" id="btn-teacher-entry">
+          <div class="role-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+          <h3>Teacher</h3>
+          <p>Generate QR codes, manage sessions & view reports</p>
+          <span class="role-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+        <div class="role-card" id="btn-student-entry">
+          <div class="role-icon"><i class="fas fa-user-graduate"></i></div>
+          <h3>Student</h3>
+          <p>Scan QR to mark attendance & track your progress</p>
+          <span class="role-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════
+     AUTH PAGES
+═══════════════════════════════════════════════════ -->
+  <div id="page-auth" class="page">
+    <div class="auth-split">
+      <!-- Left panel -->
+      <div class="auth-panel-left">
+        <button class="btn-back" onclick="showPage('landing')">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <div class="auth-brand">
+          <span class="logo-icon"><i class="fas fa-qrcode"></i></span>
+          <span class="logo-text">SmartAttend</span>
+        </div>
+        <h2 id="auth-title" class="auth-panel-title">Teacher Login</h2>
+        <p id="auth-subtitle" class="auth-panel-sub">Access your dashboard</p>
+        <div class="auth-art">
+          <div class="art-ring r1"></div>
+          <div class="art-ring r2"></div>
+          <div class="art-ring r3"></div>
+          <i id="auth-icon" class="fas fa-chalkboard-teacher art-center-icon"></i>
+        </div>
       </div>
 
-      <!-- Login Form -->
-      <form id="form-login" class="auth-form active" onsubmit="handleLogin(event)">
-        <div id="login-teacher-fields">
+      <!-- Right panel - form -->
+      <div class="auth-panel-right">
+        <div class="auth-tabs">
+          <button class="tab-btn active" id="tab-login" onclick="switchAuthTab('login')">Login</button>
+          <button class="tab-btn" id="tab-register" onclick="switchAuthTab('register')">Register</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="form-login" class="auth-form active" onsubmit="handleLogin(event)">
+          <div id="login-teacher-fields">
+            <div class="field-group">
+              <label>Email</label>
+              <div class="input-wrap"><i class="fas fa-envelope"></i>
+                <input type="email" id="login-email" placeholder="teacher@drait.edu" required />
+              </div>
+            </div>
+          </div>
+          <div id="login-student-fields" style="display:none">
+            <div class="field-group">
+              <label>USN or Email</label>
+              <div class="input-wrap"><i class="fas fa-id-card"></i>
+                <input type="text" id="login-usn" placeholder="1DA23CS001" />
+              </div>
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Password</label>
+            <div class="input-wrap"><i class="fas fa-lock"></i>
+              <input type="password" id="login-password" placeholder="••••••••" required />
+              <button type="button" class="toggle-pw" onclick="togglePw('login-password')">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div id="auth-error" class="auth-error hidden"></div>
+          <button type="submit" class="btn-primary full">
+            <span>Sign In</span><i class="fas fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="form-register" class="auth-form" onsubmit="handleRegister(event)">
+          <div class="field-group">
+            <label>Full Name</label>
+            <div class="input-wrap"><i class="fas fa-user"></i>
+              <input type="text" id="reg-name" placeholder="Dr. John Doe" required />
+            </div>
+          </div>
+          <div id="reg-student-extra" style="display:none">
+            <div class="field-group">
+              <label>USN</label>
+              <div class="input-wrap"><i class="fas fa-id-badge"></i>
+                <input type="text" id="reg-usn" placeholder="1DA23CS001" />
+              </div>
+            </div>
+          </div>
           <div class="field-group">
             <label>Email</label>
             <div class="input-wrap"><i class="fas fa-envelope"></i>
-              <input type="email" id="login-email" placeholder="teacher@college.edu" required/>
+              <input type="email" id="reg-email" placeholder="your@email.com" required />
             </div>
           </div>
-        </div>
-        <div id="login-student-fields" style="display:none">
           <div class="field-group">
-            <label>USN or Email</label>
-            <div class="input-wrap"><i class="fas fa-id-card"></i>
-              <input type="text" id="login-usn" placeholder="1RV21CS001"/>
+            <label>Password</label>
+            <div class="input-wrap"><i class="fas fa-lock"></i>
+              <input type="password" id="reg-password" placeholder="Min 6 characters" required />
             </div>
           </div>
-        </div>
-        <div class="field-group">
-          <label>Password</label>
-          <div class="input-wrap"><i class="fas fa-lock"></i>
-            <input type="password" id="login-password" placeholder="••••••••" required/>
-            <button type="button" class="toggle-pw" onclick="togglePw('login-password')">
-              <i class="fas fa-eye"></i>
-            </button>
-          </div>
-        </div>
-        <div id="auth-error" class="auth-error hidden"></div>
-        <button type="submit" class="btn-primary full">
-          <span>Sign In</span><i class="fas fa-arrow-right"></i>
-        </button>
-      </form>
-
-      <!-- Register Form -->
-      <form id="form-register" class="auth-form" onsubmit="handleRegister(event)">
-        <div class="field-group">
-          <label>Full Name</label>
-          <div class="input-wrap"><i class="fas fa-user"></i>
-            <input type="text" id="reg-name" placeholder="Dr. John Doe" required/>
-          </div>
-        </div>
-        <div id="reg-student-extra" style="display:none">
-          <div class="field-group">
-            <label>USN</label>
-            <div class="input-wrap"><i class="fas fa-id-badge"></i>
-              <input type="text" id="reg-usn" placeholder="1RV21CS001"/>
-            </div>
-          </div>
-        </div>
-        <div class="field-group">
-          <label>Email</label>
-          <div class="input-wrap"><i class="fas fa-envelope"></i>
-            <input type="email" id="reg-email" placeholder="your@email.com" required/>
-          </div>
-        </div>
-        <div class="field-group">
-          <label>Password</label>
-          <div class="input-wrap"><i class="fas fa-lock"></i>
-            <input type="password" id="reg-password" placeholder="Min 6 characters" required/>
-          </div>
-        </div>
-        <div id="auth-reg-error" class="auth-error hidden"></div>
-        <button type="submit" class="btn-primary full">
-          <span>Create Account</span><i class="fas fa-arrow-right"></i>
-        </button>
-      </form>
+          <div id="auth-reg-error" class="auth-error hidden"></div>
+          <button type="submit" class="btn-primary full">
+            <span>Create Account</span><i class="fas fa-arrow-right"></i>
+          </button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ══════════════════════════════════════════════════
+  <!-- ══════════════════════════════════════════════════
      TEACHER DASHBOARD
 ═══════════════════════════════════════════════════ -->
-<div id="page-teacher" class="page">
-  <div class="dashboard-layout">
+  <div id="page-teacher" class="page">
+    <div class="dashboard-layout">
 
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <span class="logo-icon sm"><i class="fas fa-qrcode"></i></span>
-        <span class="logo-text">SmartAttend</span>
-        <button class="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
-      </div>
-
-      <nav class="sidebar-nav">
-        <a href="#" class="nav-item active" onclick="teacherTab('overview')">
-          <i class="fas fa-th-large"></i><span>Overview</span>
-        </a>
-        <a href="#" class="nav-item" onclick="teacherTab('new-session')">
-          <i class="fas fa-plus-circle"></i><span>New Session</span>
-        </a>
-        <a href="#" class="nav-item" onclick="teacherTab('sessions')">
-          <i class="fas fa-calendar-alt"></i><span>My Sessions</span>
-        </a>
-        <a href="#" class="nav-item" onclick="teacherTab('attendance')">
-          <i class="fas fa-list-check"></i><span>Attendance</span>
-        </a>
-        <a href="#" class="nav-item" onclick="teacherTab('analytics')">
-          <i class="fas fa-chart-line"></i><span>Analytics</span>
-        </a>
-        <a href="#" class="nav-item" onclick="teacherTab('predictions')">
-          <i class="fas fa-brain"></i><span>AI Insights</span>
-        </a>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="user-chip">
-          <div class="user-avatar" id="t-avatar">T</div>
-          <div>
-            <div class="user-name" id="t-name">Teacher</div>
-            <div class="user-role">Educator</div>
-          </div>
-        </div>
-        <button class="btn-logout" onclick="logout()">
-          <i class="fas fa-sign-out-alt"></i>
-        </button>
-      </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="dash-main">
-      <div class="dash-topbar">
-        <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-        <h1 class="dash-page-title" id="t-page-title">Overview</h1>
-        <div class="topbar-actions">
-          <div class="date-chip"><i class="fas fa-calendar"></i> <span id="today-date"></span></div>
-        </div>
-      </div>
-
-      <!-- ── Overview Tab ── -->
-      <div id="tab-overview" class="dash-tab active">
-        <div class="stats-grid">
-          <div class="stat-card blue">
-            <i class="fas fa-chalkboard"></i>
-            <div class="stat-val" id="stat-sessions">—</div>
-            <div class="stat-label">Total Sessions</div>
-          </div>
-          <div class="stat-card green">
-            <i class="fas fa-users"></i>
-            <div class="stat-val" id="stat-students">—</div>
-            <div class="stat-label">Students</div>
-          </div>
-          <div class="stat-card orange">
-            <i class="fas fa-calendar-check"></i>
-            <div class="stat-val" id="stat-today">—</div>
-            <div class="stat-label">Today's Attendance</div>
-          </div>
-          <div class="stat-card purple">
-            <i class="fas fa-percent"></i>
-            <div class="stat-val" id="stat-avg">—</div>
-            <div class="stat-label">Avg Attendance %</div>
-          </div>
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <span class="logo-icon sm"><i class="fas fa-qrcode"></i></span>
+          <span class="logo-text">SmartAttend</span>
+          <button class="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
         </div>
 
-        <div class="charts-row">
-          <div class="chart-card wide">
-            <h3>Attendance Trend (Last 14 Days)</h3>
-            <canvas id="chart-trend"></canvas>
-          </div>
-          <div class="chart-card">
-            <h3>Subject-wise Avg</h3>
-            <canvas id="chart-subjects"></canvas>
-          </div>
-        </div>
-      </div>
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-item active" onclick="teacherTab('overview')">
+            <i class="fas fa-th-large"></i><span>Overview</span>
+          </a>
+          <a href="#" class="nav-item" onclick="teacherTab('new-session')">
+            <i class="fas fa-plus-circle"></i><span>New Session</span>
+          </a>
+          <a href="#" class="nav-item" onclick="teacherTab('sessions')">
+            <i class="fas fa-calendar-alt"></i><span>My Sessions</span>
+          </a>
+          <a href="#" class="nav-item" onclick="teacherTab('attendance')">
+            <i class="fas fa-list-check"></i><span>Attendance</span>
+          </a>
+          <a href="#" class="nav-item" onclick="teacherTab('analytics')">
+            <i class="fas fa-chart-line"></i><span>Analytics</span>
+          </a>
+          <a href="#" class="nav-item" onclick="teacherTab('predictions')">
+            <i class="fas fa-brain"></i><span>AI Insights</span>
+          </a>
+        </nav>
 
-      <!-- ── New Session Tab ── -->
-      <div id="tab-new-session" class="dash-tab">
-        <div class="card form-card">
-          <h2><i class="fas fa-plus-circle"></i> Create New Session</h2>
-          <form id="form-session" onsubmit="createSession(event)">
-            <div class="form-row">
-              <div class="field-group">
-                <label>Subject</label>
-                <div class="input-wrap"><i class="fas fa-book"></i>
-                  <input type="text" id="s-subject" placeholder="e.g. Data Structures" required/>
-                </div>
-              </div>
-              <div class="field-group">
-                <label>Date</label>
-                <div class="input-wrap"><i class="fas fa-calendar"></i>
-                  <input type="date" id="s-date" required/>
-                </div>
-              </div>
+        <div class="sidebar-footer">
+          <div class="user-chip">
+            <div class="user-avatar" id="t-avatar">T</div>
+            <div>
+              <div class="user-name" id="t-name">Teacher</div>
+              <div class="user-role">Educator</div>
             </div>
-            <div class="form-row">
-              <div class="field-group">
-                <label>Start Time</label>
-                <div class="input-wrap"><i class="fas fa-clock"></i>
-                  <input type="time" id="s-start" required/>
-                </div>
-              </div>
-              <div class="field-group">
-                <label>End Time</label>
-                <div class="input-wrap"><i class="fas fa-clock"></i>
-                  <input type="time" id="s-end" required/>
-                </div>
-              </div>
-            </div>
-            <button type="submit" class="btn-primary">
-              <i class="fas fa-qrcode"></i> Generate QR Code
-            </button>
-          </form>
+          </div>
+          <button class="btn-logout" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </aside>
 
-          <!-- QR Result -->
-          <div id="qr-result" class="qr-result hidden">
-            <div class="qr-success-badge"><i class="fas fa-check-circle"></i> Session Created!</div>
-            <div class="qr-display">
-              <img id="qr-img" src="" alt="QR Code"/>
+      <!-- Main Content -->
+      <main class="dash-main">
+        <div class="dash-topbar">
+          <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+          <h1 class="dash-page-title" id="t-page-title">Overview</h1>
+          <div class="topbar-actions">
+            <div class="date-chip"><i class="fas fa-calendar"></i> <span id="today-date"></span></div>
+          </div>
+        </div>
+
+        <!-- ── Overview Tab ── -->
+        <div id="tab-overview" class="dash-tab active">
+          <div class="stats-grid">
+            <div class="stat-card blue">
+              <i class="fas fa-chalkboard"></i>
+              <div class="stat-val" id="stat-sessions">—</div>
+              <div class="stat-label">Total Sessions</div>
             </div>
-            <p class="qr-caption">Share this QR with students. Valid during session time.</p>
-            <div class="qr-actions">
-              <button class="btn-secondary" onclick="printQR()">
-                <i class="fas fa-print"></i> Print QR
+            <div class="stat-card green">
+              <i class="fas fa-users"></i>
+              <div class="stat-val" id="stat-students">—</div>
+              <div class="stat-label">Students</div>
+            </div>
+            <div class="stat-card orange">
+              <i class="fas fa-calendar-check"></i>
+              <div class="stat-val" id="stat-today">—</div>
+              <div class="stat-label">Today's Attendance</div>
+            </div>
+            <div class="stat-card purple">
+              <i class="fas fa-percent"></i>
+              <div class="stat-val" id="stat-avg">—</div>
+              <div class="stat-label">Avg Attendance %</div>
+            </div>
+          </div>
+
+          <div class="charts-row">
+            <div class="chart-card wide">
+              <h3>Attendance Trend (Last 14 Days)</h3>
+              <canvas id="chart-trend"></canvas>
+            </div>
+            <div class="chart-card">
+              <h3>Subject-wise Avg</h3>
+              <canvas id="chart-subjects"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── New Session Tab ── -->
+        <div id="tab-new-session" class="dash-tab">
+          <div class="card form-card">
+            <h2><i class="fas fa-plus-circle"></i> Create New Session</h2>
+            <form id="form-session" onsubmit="createSession(event)">
+              <div class="form-row">
+                <div class="field-group">
+                  <label>Subject</label>
+                  <div class="input-wrap"><i class="fas fa-book"></i>
+                    <input type="text" id="s-subject" placeholder="e.g. Data Structures" required />
+                  </div>
+                </div>
+                <div class="field-group">
+                  <label>Date</label>
+                  <div class="input-wrap"><i class="fas fa-calendar"></i>
+                    <input type="date" id="s-date" required />
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field-group">
+                  <label>Start Time</label>
+                  <div class="input-wrap"><i class="fas fa-clock"></i>
+                    <input type="time" id="s-start" required />
+                  </div>
+                </div>
+                <div class="field-group">
+                  <label>End Time</label>
+                  <div class="input-wrap"><i class="fas fa-clock"></i>
+                    <input type="time" id="s-end" required />
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn-primary">
+                <i class="fas fa-qrcode"></i> Generate QR Code
               </button>
-              <button class="btn-secondary" onclick="downloadQR()">
-                <i class="fas fa-download"></i> Download
-              </button>
+            </form>
+
+            <!-- QR Result -->
+            <div id="qr-result" class="qr-result hidden">
+              <div class="qr-success-badge"><i class="fas fa-check-circle"></i> Session Created!</div>
+              <div class="qr-display">
+                <img id="qr-img" src="" alt="QR Code" />
+              </div>
+              <p class="qr-caption">Share this QR with students. Valid during session time.</p>
+              <div class="qr-actions">
+                <button class="btn-secondary" onclick="printQR()">
+                  <i class="fas fa-print"></i> Print QR
+                </button>
+                <button class="btn-secondary" onclick="downloadQR()">
+                  <i class="fas fa-download"></i> Download
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- ── Sessions Tab ── -->
-      <div id="tab-sessions" class="dash-tab">
-        <div class="card">
-          <div class="card-header">
-            <h2><i class="fas fa-calendar-alt"></i> My Sessions</h2>
-            <button class="btn-primary sm" onclick="loadSessions()">
-              <i class="fas fa-sync"></i> Refresh
-            </button>
+        <!-- ── Sessions Tab ── -->
+        <div id="tab-sessions" class="dash-tab">
+          <div class="card">
+            <div class="card-header">
+              <h2><i class="fas fa-calendar-alt"></i> My Sessions</h2>
+              <button class="btn-primary sm" onclick="loadSessions()">
+                <i class="fas fa-sync"></i> Refresh
+              </button>
+            </div>
+            <div id="sessions-table-wrap">
+              <table class="data-table" id="sessions-table">
+                <thead>
+                  <tr>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Attendance</th>
+                    <th>QR</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="sessions-tbody"></tbody>
+              </table>
+            </div>
           </div>
-          <div id="sessions-table-wrap">
-            <table class="data-table" id="sessions-table">
+        </div>
+
+        <!-- ── Attendance Tab ── -->
+        <div id="tab-attendance" class="dash-tab">
+          <div class="card">
+            <div class="card-header">
+              <h2><i class="fas fa-list-check"></i> Attendance Records</h2>
+              <div class="filter-row">
+                <select id="att-filter-subject" onchange="loadAttendance()">
+                  <option value="">All Subjects</option>
+                </select>
+                <input type="date" id="att-filter-date" onchange="loadAttendance()" />
+                <button class="btn-secondary sm" onclick="clearFilters()">Clear</button>
+              </div>
+            </div>
+            <table class="data-table">
               <thead>
                 <tr>
-                  <th>Subject</th><th>Date</th><th>Time</th>
-                  <th>Attendance</th><th>QR</th><th>Actions</th>
+                  <th>Student</th>
+                  <th>USN</th>
+                  <th>Subject</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Status</th>
                 </tr>
               </thead>
-              <tbody id="sessions-tbody"></tbody>
+              <tbody id="attendance-tbody"></tbody>
             </table>
           </div>
         </div>
-      </div>
 
-      <!-- ── Attendance Tab ── -->
-      <div id="tab-attendance" class="dash-tab">
-        <div class="card">
-          <div class="card-header">
-            <h2><i class="fas fa-list-check"></i> Attendance Records</h2>
-            <div class="filter-row">
-              <select id="att-filter-subject" onchange="loadAttendance()">
-                <option value="">All Subjects</option>
-              </select>
-              <input type="date" id="att-filter-date" onchange="loadAttendance()"/>
-              <button class="btn-secondary sm" onclick="clearFilters()">Clear</button>
-            </div>
-          </div>
-          <table class="data-table">
-            <thead>
-              <tr><th>Student</th><th>USN</th><th>Subject</th>
-                  <th>Date</th><th>Time</th><th>Status</th></tr>
-            </thead>
-            <tbody id="attendance-tbody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ── Analytics Tab ── -->
-      <div id="tab-analytics" class="dash-tab">
-        <div class="card">
-          <div class="card-header">
-            <h2><i class="fas fa-chart-line"></i> Student Analytics</h2>
-          </div>
-          <table class="data-table">
-            <thead>
-              <tr><th>Student</th><th>USN</th><th>Sessions</th>
-                  <th>Attended</th><th>Percentage</th><th>Status</th></tr>
-            </thead>
-            <tbody id="analytics-tbody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ── AI Insights Tab ── -->
-      <div id="tab-predictions" class="dash-tab">
-        <div class="ai-header">
-          <i class="fas fa-brain"></i>
-          <div>
-            <h2>AI Attendance Insights</h2>
-            <p>ML-powered risk prediction and pattern detection</p>
-          </div>
-          <button class="btn-primary" onclick="loadPredictions()">
-            <i class="fas fa-sync"></i> Run Analysis
-          </button>
-        </div>
-
-        <div class="ai-grid">
+        <!-- ── Analytics Tab ── -->
+        <div id="tab-analytics" class="dash-tab">
           <div class="card">
-            <h3><i class="fas fa-exclamation-triangle"></i> At-Risk Students</h3>
-            <div id="predictions-list" class="predictions-list">
-              <div class="empty-state">Click "Run Analysis" to generate predictions</div>
+            <div class="card-header">
+              <h2><i class="fas fa-chart-line"></i> Student Analytics</h2>
             </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>USN</th>
+                  <th>Sessions</th>
+                  <th>Attended</th>
+                  <th>Percentage</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="analytics-tbody"></tbody>
+            </table>
           </div>
-          <div class="card">
-            <h3><i class="fas fa-search"></i> Anomaly Detection</h3>
-            <div id="anomalies-list" class="predictions-list">
-              <div class="empty-state">Irregular patterns will appear here</div>
+        </div>
+
+        <!-- ── AI Insights Tab ── -->
+        <div id="tab-predictions" class="dash-tab">
+          <div class="ai-header">
+            <i class="fas fa-brain"></i>
+            <div>
+              <h2>AI Attendance Insights</h2>
+              <p>ML-powered risk prediction and pattern detection</p>
+            </div>
+            <button class="btn-primary" onclick="loadPredictions()">
+              <i class="fas fa-sync"></i> Run Analysis
+            </button>
+          </div>
+
+          <div class="ai-grid">
+            <div class="card">
+              <h3><i class="fas fa-exclamation-triangle"></i> At-Risk Students</h3>
+              <div id="predictions-list" class="predictions-list">
+                <div class="empty-state">Click "Run Analysis" to generate predictions</div>
+              </div>
+            </div>
+            <div class="card">
+              <h3><i class="fas fa-search"></i> Anomaly Detection</h3>
+              <div id="anomalies-list" class="predictions-list">
+                <div class="empty-state">Irregular patterns will appear here</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-    </main>
+      </main>
+    </div>
   </div>
-</div>
 
-<!-- ══════════════════════════════════════════════════
+  <!-- ══════════════════════════════════════════════════
      STUDENT DASHBOARD
 ═══════════════════════════════════════════════════ -->
-<div id="page-student" class="page">
-  <div class="dashboard-layout">
+  <div id="page-student" class="page">
+    <div class="dashboard-layout">
 
-    <aside class="sidebar" id="student-sidebar">
-      <div class="sidebar-header">
-        <span class="logo-icon sm"><i class="fas fa-qrcode"></i></span>
-        <span class="logo-text">SmartAttend</span>
-        <button class="sidebar-close" onclick="toggleStudentSidebar()"><i class="fas fa-times"></i></button>
-      </div>
-
-      <nav class="sidebar-nav">
-        <a href="#" class="nav-item active" onclick="studentTab('scan')">
-          <i class="fas fa-qrcode"></i><span>Scan QR</span>
-        </a>
-        <a href="#" class="nav-item" onclick="studentTab('my-attendance')">
-          <i class="fas fa-calendar-check"></i><span>My Attendance</span>
-        </a>
-        <a href="#" class="nav-item" onclick="studentTab('my-stats')">
-          <i class="fas fa-chart-pie"></i><span>My Stats</span>
-        </a>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="user-chip">
-          <div class="user-avatar" id="s-avatar">S</div>
-          <div>
-            <div class="user-name" id="s-name">Student</div>
-            <div class="user-role" id="s-usn">USN</div>
-          </div>
+      <aside class="sidebar" id="student-sidebar">
+        <div class="sidebar-header">
+          <span class="logo-icon sm"><i class="fas fa-qrcode"></i></span>
+          <span class="logo-text">SmartAttend</span>
+          <button class="sidebar-close" onclick="toggleStudentSidebar()"><i class="fas fa-times"></i></button>
         </div>
-        <button class="btn-logout" onclick="logout()">
-          <i class="fas fa-sign-out-alt"></i>
-        </button>
-      </div>
-    </aside>
 
-    <main class="dash-main">
-      <div class="dash-topbar">
-        <button class="menu-toggle" onclick="toggleStudentSidebar()"><i class="fas fa-bars"></i></button>
-        <h1 class="dash-page-title" id="s-page-title">Scan QR</h1>
-      </div>
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-item active" onclick="studentTab('scan')">
+            <i class="fas fa-qrcode"></i><span>Scan QR</span>
+          </a>
+          <a href="#" class="nav-item" onclick="studentTab('my-attendance')">
+            <i class="fas fa-calendar-check"></i><span>My Attendance</span>
+          </a>
+          <a href="#" class="nav-item" onclick="studentTab('my-stats')">
+            <i class="fas fa-chart-pie"></i><span>My Stats</span>
+          </a>
+        </nav>
 
-      <!-- ── Scan Tab ── -->
-      <div id="stab-scan" class="dash-tab active">
-        <div class="scan-layout">
-          <div class="card scan-card">
-            <h2><i class="fas fa-qrcode"></i> Scan Attendance QR</h2>
-            <p>Point your camera at the class QR code</p>
-
-            <div id="qr-scanner-container">
-              <div id="reader"></div>
+        <div class="sidebar-footer">
+          <div class="user-chip">
+            <div class="user-avatar" id="s-avatar">S</div>
+            <div>
+              <div class="user-name" id="s-name">Student</div>
+              <div class="user-role" id="s-usn">USN</div>
             </div>
+          </div>
+          <button class="btn-logout" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+          </button>
+        </div>
+      </aside>
 
-            <div id="scan-result" class="hidden">
-              <div id="scan-status-icon"></div>
-              <div id="scan-message"></div>
-            </div>
+      <main class="dash-main">
+        <div class="dash-topbar">
+          <button class="menu-toggle" onclick="toggleStudentSidebar()"><i class="fas fa-bars"></i></button>
+          <h1 class="dash-page-title" id="s-page-title">Scan QR</h1>
+        </div>
 
-            <div class="scan-actions">
-              <button class="btn-primary" id="btn-start-scan" onclick="startScanner()">
-                <i class="fas fa-camera"></i> Start Camera
-              </button>
-              <button class="btn-secondary hidden" id="btn-stop-scan" onclick="stopScanner()">
-                <i class="fas fa-stop"></i> Stop
-              </button>
-            </div>
+        <!-- ── Scan Tab ── -->
+        <div id="stab-scan" class="dash-tab active">
+          <div class="scan-layout">
+            <div class="card scan-card">
+              <h2><i class="fas fa-qrcode"></i> Scan Attendance QR</h2>
+              <p>Point your camera at the class QR code</p>
 
-            <!-- Manual entry fallback -->
-            <div class="manual-entry">
-              <p class="manual-label">Or enter QR token manually:</p>
-              <div class="input-wrap">
-                <i class="fas fa-keyboard"></i>
-                <input type="text" id="manual-token" placeholder="Paste QR token here"/>
+              <div id="qr-scanner-container">
+                <div id="reader"></div>
               </div>
-              <button class="btn-secondary" onclick="markManual()">
-                <i class="fas fa-check"></i> Mark Attendance
-              </button>
+
+              <div id="scan-result" class="hidden">
+                <div id="scan-status-icon"></div>
+                <div id="scan-message"></div>
+              </div>
+
+              <div class="scan-actions">
+                <button class="btn-primary" id="btn-start-scan" onclick="startScanner()">
+                  <i class="fas fa-camera"></i> Start Camera
+                </button>
+                <button class="btn-secondary hidden" id="btn-stop-scan" onclick="stopScanner()">
+                  <i class="fas fa-stop"></i> Stop
+                </button>
+              </div>
+
+              <!-- Manual entry fallback -->
+              <div class="manual-entry">
+                <p class="manual-label">Or enter QR token manually:</p>
+                <div class="input-wrap">
+                  <i class="fas fa-keyboard"></i>
+                  <input type="text" id="manual-token" placeholder="Paste QR token here" />
+                </div>
+                <button class="btn-secondary" onclick="markManual()">
+                  <i class="fas fa-check"></i> Mark Attendance
+                </button>
+              </div>
+            </div>
+
+            <div class="card recent-card">
+              <h3>Recent Attendance</h3>
+              <div id="recent-attendance-list" class="recent-list"></div>
             </div>
           </div>
+        </div>
 
-          <div class="card recent-card">
-            <h3>Recent Attendance</h3>
-            <div id="recent-attendance-list" class="recent-list"></div>
+        <!-- ── My Attendance Tab ── -->
+        <div id="stab-my-attendance" class="dash-tab">
+          <div class="card">
+            <div class="card-header">
+              <h2><i class="fas fa-calendar-check"></i> My Attendance</h2>
+              <select id="s-subject-filter" onchange="loadMyAttendance()">
+                <option value="">All Subjects</option>
+              </select>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Teacher</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="s-attendance-tbody"></tbody>
+            </table>
           </div>
         </div>
-      </div>
 
-      <!-- ── My Attendance Tab ── -->
-      <div id="stab-my-attendance" class="dash-tab">
-        <div class="card">
-          <div class="card-header">
-            <h2><i class="fas fa-calendar-check"></i> My Attendance</h2>
-            <select id="s-subject-filter" onchange="loadMyAttendance()">
-              <option value="">All Subjects</option>
-            </select>
+        <!-- ── Stats Tab ── -->
+        <div id="stab-my-stats" class="dash-tab">
+          <div class="stats-grid">
+            <div id="s-subject-cards" class="subject-cards-grid"></div>
           </div>
-          <table class="data-table">
-            <thead>
-              <tr><th>Subject</th><th>Date</th><th>Time</th>
-                  <th>Teacher</th><th>Status</th></tr>
-            </thead>
-            <tbody id="s-attendance-tbody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ── Stats Tab ── -->
-      <div id="stab-my-stats" class="dash-tab">
-        <div class="stats-grid">
-          <div id="s-subject-cards" class="subject-cards-grid"></div>
-        </div>
-        <div class="charts-row">
-          <div class="chart-card wide">
-            <h3>My Attendance Trend</h3>
-            <canvas id="chart-s-trend"></canvas>
-          </div>
-          <div class="chart-card">
-            <h3>Subject Distribution</h3>
-            <canvas id="chart-s-subjects"></canvas>
+          <div class="charts-row">
+            <div class="chart-card wide">
+              <h3>My Attendance Trend</h3>
+              <canvas id="chart-s-trend"></canvas>
+            </div>
+            <div class="chart-card">
+              <h3>Subject Distribution</h3>
+              <canvas id="chart-s-subjects"></canvas>
+            </div>
           </div>
         </div>
-      </div>
 
-    </main>
+      </main>
+    </div>
   </div>
-</div>
 
-<!-- Toast notification -->
-<div id="toast" class="toast hidden">
-  <i id="toast-icon" class="fas fa-check-circle"></i>
-  <span id="toast-msg"></span>
-</div>
+  <!-- Toast notification -->
+  <div id="toast" class="toast hidden">
+    <i id="toast-icon" class="fas fa-check-circle"></i>
+    <span id="toast-msg"></span>
+  </div>
 
-<!-- Modal backdrop -->
-<div id="modal-backdrop" class="modal-backdrop hidden" onclick="closeModal()"></div>
-<div id="modal" class="modal hidden">
-  <div id="modal-content"></div>
-</div>
+  <!-- Modal backdrop -->
+  <div id="modal-backdrop" class="modal-backdrop hidden" onclick="closeModal()"></div>
+  <div id="modal" class="modal hidden">
+    <div id="modal-content"></div>
+  </div>
 
-<script src="/static/js/api.js"></script>
-<script src="/static/js/auth.js"></script>
-<script src="/static/js/teacher.js"></script>
-<script src="/static/js/student.js"></script>
-<script src="/static/js/app.js"></script>
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/teacher.js"></script>
+  <script src="/static/js/student.js"></script>
+  <script src="/static/js/app.js"></script>
 </body>
+
 </html>

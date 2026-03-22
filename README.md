@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🎓 SmartAttend — QR-Based Smart Attendance System
 
 A full-stack, AI-powered attendance management system for colleges.
@@ -88,14 +87,14 @@ Visit **http://localhost:5000** in your browser.
 ### Students
 | Name | USN | Password |
 |------|-----|----------|
-| Arjun Mehta | 1RV21CS001 | student123 |
-| Priya Nair | 1RV21CS002 | student123 |
-| Rohan Das | 1RV21CS003 | student123 |
-| Sneha Patel | 1RV21CS004 | student123 |
-| Vikram Singh | 1RV21CS005 | student123 |
-| Kavya Reddy | 1RV21CS006 | student123 |
-| Aditya Joshi | 1RV21CS007 | student123 |
-| Meera Krishnan | 1RV21CS008 | student123 |
+| Arjun Mehta | 1DA23CS001 | student123 |
+| Priya Nair | 1DA23CS002 | student123 |
+| Rohan Das | 1DA23CS003 | student123 |
+| Sneha Patel | 1DA23CS004 | student123 |
+| Vikram Singh | 1DA23CS005 | student123 |
+| Kavya Reddy | 1DA23CS006 | student123 |
+| Aditya Joshi | 1DA23CS007 | student123 |
+| Meera Krishnan | 1DA23CS008 | student123 |
 
 ---
 
@@ -192,6 +191,3 @@ attendance (id, student_id, session_id, date, time, status)
 | QR Scanning | html5-qrcode |
 | Fonts | Syne, DM Sans (Google Fonts) |
 | Icons | Font Awesome 6 |
-=======
-# qr-attendance
->>>>>>> 213abe22453fd0c7df050bfe53b5c2fc78b80352

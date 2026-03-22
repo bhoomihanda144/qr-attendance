@@ -81,19 +81,19 @@ CREATE TABLE IF NOT EXISTS attendance (
 SAMPLE_DATA = """
 -- Sample teacher  (password = 'teacher123')
 INSERT OR IGNORE INTO teacher (name, email, password) VALUES
-  ('Dr. Ramesh Kumar',   'ramesh@college.edu',  '{hash_t1}'),
-  ('Prof. Anita Sharma', 'anita@college.edu',   '{hash_t2}');
+  ('Dr. Ramesh Kumar',   'ramesh@drait.edu',  '{hash_t1}'),
+  ('Prof. Anita Sharma', 'anita@drait.edu',   '{hash_t2}');
 
 -- Sample students  (password = 'student123')
 INSERT OR IGNORE INTO student (name, usn, email, password) VALUES
-  ('Arjun Mehta',    '1RV21CS001', 'arjun@student.edu',    '{hash_s}'),
-  ('Priya Nair',     '1RV21CS002', 'priya@student.edu',    '{hash_s}'),
-  ('Rohan Das',      '1RV21CS003', 'rohan@student.edu',    '{hash_s}'),
-  ('Sneha Patel',    '1RV21CS004', 'sneha@student.edu',    '{hash_s}'),
-  ('Vikram Singh',   '1RV21CS005', 'vikram@student.edu',   '{hash_s}'),
-  ('Kavya Reddy',    '1RV21CS006', 'kavya@student.edu',    '{hash_s}'),
-  ('Aditya Joshi',   '1RV21CS007', 'aditya@student.edu',  '{hash_s}'),
-  ('Meera Krishnan', '1RV21CS008', 'meera@student.edu',   '{hash_s}');
+  ('Arjun Mehta',    '1DA23CS001', 'arjun@gmail.com',    '{hash_s}'),
+  ('Priya Nair',     '1DA23CS002', 'priya@gmail.com',    '{hash_s}'),
+  ('Rohan Das',      '1DA23CS003', 'rohan@gmail.com',    '{hash_s}'),
+  ('Sneha Patel',    '1DA23CS004', 'sneha@gmail.com',    '{hash_s}'),
+  ('Vikram Singh',   '1DA23CS005', 'vikram@gmail.com',   '{hash_s}'),
+  ('Kavya Reddy',    '1DA23CS006', 'kavya@gmail.com',    '{hash_s}'),
+  ('Aditya Joshi',   '1DA23CS007', 'aditya@gmail.com',  '{hash_s}'),
+  ('Meera Krishnan', '1DA23CS008', 'meera@gmail.com',   '{hash_s}');
 """
 
 
