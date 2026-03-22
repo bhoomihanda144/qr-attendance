@@ -9,32 +9,32 @@ let currentUser = null;
 
 function enterAsTeacher() {
   currentRole = 'teacher';
-  document.getElementById('auth-title').textContent    = 'Teacher Login';
+  document.getElementById('auth-title').textContent = 'Teacher Login';
   document.getElementById('auth-subtitle').textContent = 'Access your dashboard';
-  document.getElementById('auth-icon').className       = 'fas fa-chalkboard-teacher art-center-icon';
+  document.getElementById('auth-icon').className = 'fas fa-chalkboard-teacher art-center-icon';
   document.getElementById('login-teacher-fields').style.display = '';
   document.getElementById('login-student-fields').style.display = 'none';
-  document.getElementById('reg-student-extra').style.display    = 'none';
+  document.getElementById('reg-student-extra').style.display = 'none';
   switchAuthTab('login');
   showPage('auth');
 }
 
 function enterAsStudent() {
   currentRole = 'student';
-  document.getElementById('auth-title').textContent    = 'Student Login';
+  document.getElementById('auth-title').textContent = 'Student Login';
   document.getElementById('auth-subtitle').textContent = 'Track your attendance';
-  document.getElementById('auth-icon').className       = 'fas fa-user-graduate art-center-icon';
+  document.getElementById('auth-icon').className = 'fas fa-user-graduate art-center-icon';
   document.getElementById('login-teacher-fields').style.display = 'none';
   document.getElementById('login-student-fields').style.display = '';
-  document.getElementById('reg-student-extra').style.display    = '';
+  document.getElementById('reg-student-extra').style.display = '';
   switchAuthTab('login');
   showPage('auth');
 }
 
 function switchAuthTab(tab) {
-  document.getElementById('form-login').classList.toggle('active',    tab === 'login');
+  document.getElementById('form-login').classList.toggle('active', tab === 'login');
   document.getElementById('form-register').classList.toggle('active', tab === 'register');
-  document.getElementById('tab-login').classList.toggle('active',    tab === 'login');
+  document.getElementById('tab-login').classList.toggle('active', tab === 'login');
   document.getElementById('tab-register').classList.toggle('active', tab === 'register');
   clearAuthErrors();
 }
@@ -50,37 +50,50 @@ async function handleLogin(e) {
   e.preventDefault();
   clearAuthErrors();
 
+  // Validate password first (shared by both roles)
+  const password = document.getElementById('login-password').value.trim();
+  if (!password) {
+    showAuthError('auth-error', 'Password is required');
+    return;
+  }
+
   try {
     let data;
     if (currentRole === 'teacher') {
-      const email    = document.getElementById('login-email').value;
-      const password = document.getElementById('login-password').value;
+      const email = document.getElementById('login-email').value.trim();
+      if (!email) {
+        showAuthError('auth-error', 'Email is required');
+        return;
+      }
       data = await API.teacherLogin({ email, password });
     } else {
-      const usn_or_email = document.getElementById('login-usn').value;
-      const password     = document.getElementById('login-password').value;
+      const usn_or_email = document.getElementById('login-usn').value.trim();
+      if (!usn_or_email) {
+        showAuthError('auth-error', 'USN or Email is required');
+        return;
+      }
       data = await API.studentLogin({ usn_or_email, password });
     }
 
     currentUser = data.user;
     onLoginSuccess(data.user);
   } catch (err) {
-    showAuthError('auth-error', err.error || 'Login failed');
+    showAuthError('auth-error', err.error || 'Invalid credentials. Please try again.');
   }
 }
 
 function onLoginSuccess(user) {
   showToast(`Welcome, ${user.name}!`, 'success');
   if (user.role === 'teacher') {
-    document.getElementById('t-name').textContent   = user.name;
+    document.getElementById('t-name').textContent = user.name;
     document.getElementById('t-avatar').textContent = user.name[0].toUpperCase();
     showPage('teacher');
     teacherTab('overview');
     loadDashboard();
     loadSubjects();
   } else {
-    document.getElementById('s-name').textContent   = user.name;
-    document.getElementById('s-usn').textContent    = user.usn || '';
+    document.getElementById('s-name').textContent = user.name;
+    document.getElementById('s-usn').textContent = user.usn || '';
     document.getElementById('s-avatar').textContent = user.name[0].toUpperCase();
     showPage('student');
     studentTab('scan');
@@ -95,8 +108,8 @@ async function handleRegister(e) {
   clearAuthErrors();
 
   try {
-    const name     = document.getElementById('reg-name').value;
-    const email    = document.getElementById('reg-email').value;
+    const name = document.getElementById('reg-name').value;
+    const email = document.getElementById('reg-email').value;
     const password = document.getElementById('reg-password').value;
 
     if (currentRole === 'teacher') {
@@ -122,7 +135,7 @@ function showAuthError(id, msg) {
 // ── Logout ────────────────────────────────────────────────────────
 
 async function logout() {
-  await API.logout().catch(() => {});
+  await API.logout().catch(() => { });
   currentUser = null;
   showPage('landing');
   showToast('Logged out successfully', 'info');
