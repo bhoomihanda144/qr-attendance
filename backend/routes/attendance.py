@@ -57,8 +57,8 @@ def mark_attendance():
     fmt          = "%Y-%m-%d %H:%M"
     session_start = datetime.strptime(start_str, fmt)
     session_end   = datetime.strptime(end_str,   fmt)
-    window_start  = session_start - timedelta(minutes=10)  # allow 10 min early
-    window_end    = session_end   + timedelta(minutes=15)  # allow 15 min grace
+    window_start  = session_start - timedelta(minutes=60)  # allow 60 min early
+    window_end    = session_end   + timedelta(minutes=60)  # allow 60 min grace
 
     status = 'present'
     if now < window_start:

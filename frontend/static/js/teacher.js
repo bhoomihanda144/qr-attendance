@@ -136,6 +136,24 @@ async function createSession(e) {
   try {
     const data = await API.createSession(body);
     document.getElementById('qr-img').src = data.qr_image;
+
+    // Show copyable token for manual entry
+    let tokenEl = document.getElementById('qr-token-display');
+    if (!tokenEl) {
+      tokenEl = document.createElement('div');
+      tokenEl.id = 'qr-token-display';
+      tokenEl.style.cssText = 'margin-top:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 16px;text-align:center;';
+      document.getElementById('qr-result').appendChild(tokenEl);
+    }
+    tokenEl.innerHTML = `
+      <div style="color:var(--text3);font-size:0.78rem;margin-bottom:6px">QR Token (for manual entry)</div>
+      <div style="font-family:var(--font-mono);font-size:0.82rem;color:var(--accent);word-break:break-all;cursor:pointer"
+           onclick="navigator.clipboard.writeText('${data.qr_token}');showToast('Token copied!','success')"
+           title="Click to copy">
+        ${data.qr_token}
+        <i class="fas fa-copy" style="margin-left:8px;opacity:0.6"></i>
+      </div>`;
+
     document.getElementById('qr-result').classList.remove('hidden');
     showToast('Session created! QR code ready.', 'success');
     loadDashboard();

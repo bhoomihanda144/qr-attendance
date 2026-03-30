@@ -106,6 +106,7 @@ def student_login():
     session['user_id']   = student['id']
     session['user_role'] = 'student'
     session['user_name'] = student['name']
+    session['user_usn']  = student['usn']
 
     return jsonify({
         'message': 'Login successful',
@@ -126,8 +127,11 @@ def logout():
 def me():
     if 'user_id' not in session:
         return jsonify({'error': 'Not authenticated'}), 401
-    return jsonify({
+    resp = {
         'id':   session['user_id'],
         'name': session['user_name'],
         'role': session['user_role']
-    })
+    }
+    if session['user_role'] == 'student':
+        resp['usn'] = session.get('user_usn', '')
+    return jsonify(resp)
